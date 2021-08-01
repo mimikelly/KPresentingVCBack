@@ -33,20 +33,13 @@
 
 - (void)handleBackGesture:(UIPanGestureRecognizer *)sender{
     int location_X = kHeight/2;
-    // 手势开始位置
-    CGPoint startPoint;
     CGPoint velocity = [sender velocityInView:self.view];
     CGRect frame = self.view.frame;
     switch (sender.state) {
-        case UIGestureRecognizerStateBegan:{
-            startPoint = [sender locationInView:self.view];
-            
-        } break;
         case UIGestureRecognizerStateChanged: {
             CGPoint touchPoint = [sender locationInView:self.view];
-            frame.origin.y = (touchPoint.x - startPoint.x) / kWidth * kHeight;
+            frame.origin.y = (touchPoint.x / kWidth) * kHeight;
             self.view.frame = frame;
-            
         } break;
         case UIGestureRecognizerStateEnded: {
             if(velocity.x > 200) {
